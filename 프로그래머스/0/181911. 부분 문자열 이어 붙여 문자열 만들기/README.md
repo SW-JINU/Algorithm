@@ -2,6 +2,10 @@
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181911) 
 
+### 생각한 점
+- 문자열의 특정 길이를 가져와야 함
+- 이후 받는 parts의 2차원 배열 값을 풀어서 가져와야 함
+
 ### 성능 요약
 
 메모리: 4.11 MB, 시간: 0.05 ms
