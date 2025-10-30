@@ -1,44 +1,39 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
 int main() {
     int M, N;
-    cin >> M >> N;  // 구간의 시작(M)과 끝(N)을 입력받음
+    cin >> M >> N;
 
-    vector<int> arr; // 소수를 저장할 벡터
+    vector<bool> isPrime(N + 1, true); // 0~N까지 소수 여부
 
-    int result = 0;  // 소수 합계를 저장할 변수
+    isPrime[0] = isPrime[1] = false; // 0과 1은 소수가 아님
 
-    // M~N 구간의 모든 수를 검사
-    for (int i = M; i <= N; i++) {
-        int cnt = 0;  // 약수 개수를 세기 위한 변수
-
-        // 1부터 i까지 나누어떨어지는 수의 개수 계산
-        for (int j = 1; j <= i; j++) {
-            if (i % j == 0) {
-                cnt += 1;  // 나누어떨어지면 카운트 증가
+    // 에라토스테네스의 체
+    for (int i = 2; i * i <= N; i++) {
+        if (isPrime[i]) {
+            for (int j = i * i; j <= N; j += i) {
+                isPrime[j] = false; // i의 배수는 소수가 아님
             }
         }
+    }
 
-        // 약수가 정확히 2개이면 소수 (1과 자기 자신)
-        if (cnt == 2) {
-            arr.push_back(i);  // 소수 벡터에 추가
+    int sum = 0;
+    int minPrime = -1;
+
+    // M~N 사이 소수 합과 최소 소수 찾기
+    for (int i = M; i <= N; i++) {
+        if (isPrime[i]) {
+            sum += i;
+            if (minPrime == -1) minPrime = i; // 최소 소수 저장
         }
     }
 
-    // 소수의 합 계산
-    for (int i = 0; i < (int)arr.size(); i++) {
-        result += arr[i];
-    }
-
-    // 결과 출력
-    if ((int)arr.size() > 0) { // 소수가 하나라도 있을 경우
-        cout << result << "\n" << arr[0] << "\n"; // 합계와 최소 소수 출력
-    }
-    else { // 소수가 없는 경우
+    if (minPrime == -1) { // 소수가 없는 경우
         cout << -1 << "\n";
+    } else {
+        cout << sum << "\n" << minPrime << "\n";
     }
 
     return 0;
