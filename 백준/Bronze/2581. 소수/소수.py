@@ -1,26 +1,22 @@
-# M과 N 입력 (범위의 시작과 끝)
 M = int(input())
 N = int(input())
 
-# 소수를 저장할 리스트
-arr = []
+# 0~N까지 소수 여부 True로 초기화
+is_prime = [True] * (N + 1)
+is_prime[0] = is_prime[1] = False  # 0과 1은 소수가 아님
 
-# M~N 사이 모든 수를 검사
-for i in range(M, N + 1):
-    cnt = 0  # 약수 개수를 세기 위한 변수
+# 에라토스테네스의 체
+for i in range(2, int(N ** 0.5) + 1):
+    if is_prime[i]:
+        for j in range(i * i, N + 1, i):
+            is_prime[j] = False  # i의 배수는 소수가 아님
 
-    # 1부터 i까지 나누어떨어지는 수의 개수 계산
-    for j in range(1, i + 1):
-        if (i % j) == 0:
-            cnt += 1  # 나누어떨어지면 카운트 증가
+# M~N 사이 소수만 추출
+primes = [i for i in range(M, N + 1) if is_prime[i]]
 
-    # 약수가 정확히 2개이면 소수 (1과 자기 자신만 나누어떨어짐)
-    if cnt == 2:
-        arr.append(i)  # 소수 리스트에 추가
-
-# 소수가 하나라도 있는 경우
-if len(arr) > 0:
-    print(sum(arr))     # 소수 합 출력
-    print(arr[0])       # 최소 소수 출력
+# 결과 출력
+if primes:
+    print(sum(primes))   # 소수 합
+    print(primes[0])     # 최소 소수
 else:
-    print(-1)           # 소수가 없는 경우 -1 출력
+    print(-1)            # 소수가 없는 경우
