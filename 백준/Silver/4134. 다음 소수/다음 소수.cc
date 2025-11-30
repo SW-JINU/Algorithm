@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-bool isPrime(long long int num) {
+bool isPrime(long long num) {
   if (num == 0 || num == 1)
     return false;
 
@@ -9,7 +9,7 @@ bool isPrime(long long int num) {
   else if (num % 2 == 0)
     return false;
   
-  for (long long int i = 3; i * i <= num; i += 2) {
+  for (long long i = 3; i * i <= num; i += 2) {
     if (num % i == 0) {
       return false;
     }
