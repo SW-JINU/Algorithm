@@ -1,34 +1,39 @@
 #include <iostream>  // 표준 입출력 사용
+#include <vector>    // (사용되지는 않지만 포함됨)
 #include <set>       // 중복을 허용하지 않는 set 컨테이너 사용
 
 using namespace std;
 
 int main() {
     int N;
-    cin >> N;  // 입력되는 채팅 로그 개수
+    cin >> N;  // 채팅 로그의 총 개수 입력
 
-    set<string> users;  // 현재 세션에서 등장한 사용자 이름 저장 (중복 제거)
-    string user;        // 입력받을 사용자 이름
-    int cnt = 0;        // 인사 횟수(새로운 사용자 수) 카운트
+    set<string> users;  // 현재 채팅방에서 등장한 사용자들을 저장 (중복 자동 제거)
+    string user;        // 입력받을 문자열 ("ENTER" 또는 사용자 이름)
+    int cnt = 0;        // 전체 인사 횟수(정답)
 
     for (int i = 0; i < N; i++) {
-        cin >> user;    // 사용자 이름 또는 "ENTER" 입력
+        cin >> user;
 
-        // 새로운 채팅방이 열리는 경우
+        // 새로운 채팅방이 시작되는 경우
         if (user == "ENTER") {
-            users.clear();  // 이전 채팅방 기록 초기화
-            continue;       // 다음 입력으로 이동
+            // 이전 채팅방에서 인사한 사람 수를 누적
+            cnt += users.size();
+
+            // 다음 채팅방을 위해 사용자 목록 초기화
+            users.clear();
         }
         else {
-            // 현재 채팅방에서 처음 등장한 사용자라면
-            if (users.find(user) == users.end()) {
-                users.insert(user); // 사용자 이름 저장
-                cnt++;              // 인사 횟수 증가
-            }
+            // 현재 채팅방에서 사용자 이름 저장
+            // set이므로 이미 등장한 이름은 자동으로 무시됨
+            users.insert(user);
         }
     }
 
-    cout << cnt << "\n";  // 전체 인사 횟수 출력
+    // 마지막 채팅방에서 인사한 사람 수 누적
+    cnt += users.size();
+
+    cout << cnt << "\n";  // 최종 인사 횟수 출력
 
     return 0;
 }
