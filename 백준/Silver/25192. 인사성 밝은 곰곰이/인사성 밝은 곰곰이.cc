@@ -1,5 +1,4 @@
 #include <iostream>  // 표준 입출력 사용
-#include <vector>    // (사용되지는 않지만 포함됨)
 #include <set>       // 중복을 허용하지 않는 set 컨테이너 사용
 
 using namespace std;
