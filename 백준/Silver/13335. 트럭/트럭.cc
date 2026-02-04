@@ -39,13 +39,12 @@ int main() {
             bridge.push(truck.front());
             weight += truck.front();
             truck.pop();   // 트럭 큐에서 제거
-            time++;        // 1초 경과
         }
         else {
             // 다리 하중 초과 → 빈 칸(0) 올리기
             bridge.push(0);
-            time++;        // 1초 경과
         }
+        time++;        // 1초 경과
     }
 
     // ===============================
