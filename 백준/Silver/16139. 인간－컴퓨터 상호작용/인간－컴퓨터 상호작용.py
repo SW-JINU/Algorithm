@@ -2,7 +2,7 @@ import sys
 input = sys.stdin.readline
 
 # 문자열 입력
-S = input()                 
+S = input().strip()                 
 n = len(S)                  # 문자열 길이
 
 # dp[문자][인덱스] 배열 생성
