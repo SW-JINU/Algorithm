@@ -1,16 +1,16 @@
 import sys
 input = sys.stdin.readline
 
+# 누적합 배열
+# b[i][j] : (1,1) ~ (i,j)까지 B로 시작할 때 다시 칠해야 하는 개수
+# w[i][j] : (1,1) ~ (i,j)까지 W로 시작할 때 다시 칠해야 하는 개수
+b = [[0] * 2001 for _ in range(2001)]
+w = [[0] * 2001 for _ in range(2001)]
+
 N, M, K = map(int, input().split())
 
 # 원본 체스판
 board = [[''] * (M + 1)] + [[''] + list(input().strip()) for _ in range(N)]
-
-# 누적합 배열
-# b[i][j] : (1,1) ~ (i,j)까지 B로 시작할 때 다시 칠해야 하는 개수
-# w[i][j] : (1,1) ~ (i,j)까지 W로 시작할 때 다시 칠해야 하는 개수
-b = [[0] * (M + 1) for _ in range(N + 1)]
-w = [[0] * (M + 1) for _ in range(N + 1)]
 
 # 입력 + 누적합 계산
 for i in range(1, N + 1):
